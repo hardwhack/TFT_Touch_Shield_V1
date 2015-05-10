@@ -14,7 +14,15 @@
 #include <stdint.h>
 #include <TouchScreen.h> 
 #include <TFT.h>
+
 #ifdef SEEEDUINO
+  #define YP A2   // must be an analog pin, use "An" notation!
+  #define XM A1   // must be an analog pin, use "An" notation!
+  #define YM 14   // can be a digital pin, this is A0
+  #define XP 17   // can be a digital pin, this is A3 
+#endif
+
+#ifdef ARDUINO_AVR_LEONARDO
   #define YP A2   // must be an analog pin, use "An" notation!
   #define XM A1   // must be an analog pin, use "An" notation!
   #define YM 14   // can be a digital pin, this is A0
@@ -52,7 +60,7 @@ void setup(void) {
 
 void loop(void) {
   // a point object holds x y and z coordinates
-  Point p = ts.getPoint();
+  TSPoint p = ts.getPoint();
 
   if (p.z > ts.pressureThreshhold) {
      Serial.print("Raw X = "); Serial.print(p.x);
